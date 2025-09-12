@@ -43,12 +43,14 @@ export default function RootLayout({
               <Link href={"/admin/generate-routine"} className='font-semibold'>Admin</Link>
             </div>
             <SignedOut>
-              <SignInButton className="font-semibold" />
-              <SignUpButton>
-                <Button>
-                  Sign Up
-                </Button>
-              </SignUpButton>
+              <div className="font-semibold flex gap-4 justify-center items-center">
+                <SignInButton />
+                <SignUpButton>
+                  <Button>
+                    Sign Up
+                  </Button>
+                </SignUpButton>
+              </div>
             </SignedOut>
             <SignedIn>
               <UserButton />
