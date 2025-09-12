@@ -124,7 +124,7 @@ export async function generateRoutine() {
     // await sql.transaction(
     //     teachers.map((teacher) => sql`INSERT INTO teachers (name, department, subject) VALUES (${teacher.name}, ${teacher.department}, ${teacher.subject})`)
     // );
-    console.log(timings)
+    // console.log(timings)
 
     let output = transform(classes, teachers, timings)
     // console.log(output)
@@ -179,3 +179,28 @@ export async function updateTeachers(id, name, department, subject) {
         return 0
     }
 }
+
+export async function addTeacher(name, department, subject) {
+    // console.log(id, name, department, subject)
+    const sql = neon(process.env.DATABASE_URL);
+    try {
+        await sql`INSERT INTO teachers (name, department, subject) VALUES (${name}, ${department}, ${subject})`;
+        return 1
+    } catch (err) {
+        console.log(err)
+        return 0
+    }
+}
+
+export async function deleteTeacher(id) {
+    const sql = neon(process.env.DATABASE_URL);
+    try {
+        await sql`DELETE FROM teachers WHERE id=${id}`;
+        return 1
+    } catch (err) {
+        console.log(err)
+        return 0
+    }
+}
+
+
