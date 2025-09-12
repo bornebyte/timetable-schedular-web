@@ -102,117 +102,11 @@ function groupByDepartment(data) {
 }
 
 export async function generateRoutine() {
-    // const sql = neon(process.env.DATABASE_URL);
-    // const classes = await sql`SELECT * FROM classes`;
-    // const teachers = await sql`SELECT * FROM teachers`;
+    const sql = neon(process.env.DATABASE_URL);
+    const classes = await sql`SELECT * FROM classes`;
+    const teachers = await sql`SELECT * FROM teachers`;
     // const timings = await sql`SELECT * FROM timings`;
 
-    let classes = [
-        {
-            "name": "011",
-            "department": "CSE"
-        },
-        {
-            "name": "114",
-            "department": "AI ML"
-        },
-        {
-            "name": "216",
-            "department": "Cyber Security"
-        },
-    ]
-    let teachers = [
-        {
-            "name": "Alok Thakur",
-            "department": "CSE",
-            "subject": "Data Structure"
-        },
-        {
-            "name": "Prem",
-            "department": "CSE",
-            "subject": "Chemistry"
-        },
-        {
-            "name": "Sashank",
-            "department": "CSE",
-            "subject": "Logistic Regression"
-        },
-        {
-            "name": "Neha",
-            "department": "CSE",
-            "subject": "Physics"
-        },
-        {
-            "name": "Dipesh",
-            "department": "CSE",
-            "subject": "Chemistry"
-        },
-        {
-            "name": "Rohit",
-            "department": "CSE",
-            "subject": "Statistics"
-        },
-        {
-            "name": "Kanya",
-            "department": "Cyber Security",
-            "subject": "Vulnulabirity findings"
-        },
-        {
-            "name": "Anshu",
-            "department": "Cyber Security",
-            "subject": "Fishing"
-        },
-        {
-            "name": "Harsha",
-            "department": "Cyber Security",
-            "subject": "SQL injection"
-        },
-        {
-            "name": "Yash",
-            "department": "Cyber Security",
-            "subject": "Network Security"
-        },
-        {
-            "name": "Osam",
-            "department": "Cyber Security",
-            "subject": "Firewall"
-        },
-        {
-            "name": "Anuj",
-            "department": "AI ML",
-            "subject": "Physics"
-        },
-        {
-            "name": "Rahul",
-            "department": "AI ML",
-            "subject": "Math"
-        },
-        {
-            "name": "Ram",
-            "department": "AI ML",
-            "subject": "Chemistry"
-        },
-        {
-            "name": "Hari",
-            "department": "AI ML",
-            "subject": "Python"
-        },
-        {
-            "name": "Munna",
-            "department": "AI ML",
-            "subject": "Statistics"
-        },
-        {
-            "name": "Aman",
-            "department": "AI ML",
-            "subject": "Linear Algebra"
-        },
-        {
-            "name": "Nitesh",
-            "department": "Cyber Security",
-            "subject": "Logestic Regression"
-        }
-    ]
     let timings = [
         {
             "department": "CSE",
@@ -227,6 +121,10 @@ export async function generateRoutine() {
             "times": ["8:45 - 9:45", "9:45 - 10:45", "10:45 - 11:45", "11:45 - 12:45", "1:45 - 2:45", "2:45 - 3:45"]
         }
     ]
+    // await sql.transaction(
+    //     teachers.map((teacher) => sql`INSERT INTO teachers (name, department, subject) VALUES (${teacher.name}, ${teacher.department}, ${teacher.subject})`)
+    // );
+    console.log(timings)
 
     let output = transform(classes, teachers, timings)
     // console.log(output)
