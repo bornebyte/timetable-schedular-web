@@ -105,32 +105,20 @@ export async function generateRoutine() {
     const sql = neon(process.env.DATABASE_URL);
     const classes = await sql`SELECT * FROM classes`;
     const teachers = await sql`SELECT * FROM teachers`;
-    // const timings = await sql`SELECT * FROM timings`;
+    const timings = await sql`SELECT * FROM timings`;
 
-    let timings = [
-        {
-            "department": "CSE",
-            "times": ["8:45 - 9:45", "9:45 - 10:45", "10:45 - 11:45", "11:45 - 12:45", "1:45 - 2:45", "2:45 - 3:45"]
-        },
-        {
-            "department": "AI ML",
-            "times": ["8:45 - 9:45", "9:45 - 10:45", "10:45 - 11:45", "11:45 - 12:45", "1:45 - 2:45", "2:45 - 3:45"]
-        },
-        {
-            "department": "Cyber Security",
-            "times": ["8:45 - 9:45", "9:45 - 10:45", "10:45 - 11:45", "11:45 - 12:45", "1:45 - 2:45", "2:45 - 3:45"]
-        }
-    ]
     // await sql.transaction(
     //     teachers.map((teacher) => sql`INSERT INTO teachers (name, department, subject) VALUES (${teacher.name}, ${teacher.department}, ${teacher.subject})`)
     // );
     // console.log(timings)
+    timings.map((i) => {
+        i.times = i.times.split("\n")
+    })
+    console.log(timings)
 
     let output = transform(classes, teachers, timings)
-    // console.log(output)
 
     const grouped = groupByDepartment(output);
-    // console.log(grouped)
     return grouped
 }
 
