@@ -47,51 +47,6 @@ const transform = (classes, teachers, timings) => {
     return output
 }
 
-export async function setTimings() {
-    let timings = [
-        {
-            "department": "CSE",
-            "times": ["8-45:9-45", "9-45:10-45", "10-45:11-45", "11-45:12-45", "1-45:2-45", "2-45:3-45"]
-        },
-        {
-            "department": "AI ML",
-            "times": ["8-45:9-45", "9-45:10-45", "10-45:11-45", "11-45:12-45", "1-45:2-45", "2-45:3-45"]
-        },
-        {
-            "department": "Data Science",
-            "times": ["8-45:9-45", "9-45:10-45", "10-45:11-45", "11-45:12-45", "1-45:2-45", "2-45:3-45"]
-        },
-        {
-            "department": "Cyber Security",
-            "times": ["8-45:9-45", "9-45:10-45", "10-45:11-45", "11-45:12-45", "1-45:2-45", "2-45:3-45"]
-        },
-        {
-            "department": "Computer Science",
-            "times": ["8-45:9-45", "9-45:10-45", "10-45:11-45", "11-45:12-45", "1-45:2-45", "2-45:3-45"]
-        }
-    ]
-
-    const sql = neon(process.env.DATABASE_URL);
-
-    if (!timings || timings.length === 0) {
-        console.log("No teachers to insert.");
-        return;
-    }
-
-    const data = sql.transaction(
-        timings.map((timings) => sql`INSERT INTO timings (department, times) VALUES (${timings.department}, ${timings.times})`)
-    );
-    for (const timing of timings) {
-        sql`
-            INSERT INTO timings (department, times)
-            VALUES (${timing.department}, ${JSON.stringify(timing.times)})
-            ON CONFLICT (department) DO UPDATE SET times = EXCLUDED.times;
-        `;
-    }
-    // console.log(`Inserted ${data.length} teachers.`);
-    // return data;
-}
-
 function groupByDepartment(data) {
     return data.reduce((acc, row) => {
         const dept = row.department;
@@ -114,7 +69,6 @@ export async function generateRoutine() {
     timings.map((i) => {
         i.times = i.times.split("\n")
     })
-    console.log(timings)
 
     let output = transform(classes, teachers, timings)
 
@@ -133,7 +87,7 @@ export async function saveRoutine(output) {
     }
 }
 
-export async function getRoutine(output) {
+export async function getRoutine() {
     const sql = neon(process.env.DATABASE_URL);
     try {
         let data = await sql`SELECT * FROM routines`;
@@ -157,7 +111,6 @@ export async function getTeachers() {
 }
 
 export async function updateTeachers(id, name, department, subject) {
-    // console.log(id, name, department, subject)
     const sql = neon(process.env.DATABASE_URL);
     try {
         await sql`UPDATE teachers SET name=${name}, department=${department}, subject=${subject} WHERE id=${id}`;
@@ -169,7 +122,6 @@ export async function updateTeachers(id, name, department, subject) {
 }
 
 export async function addTeacher(name, department, subject) {
-    // console.log(id, name, department, subject)
     const sql = neon(process.env.DATABASE_URL);
     try {
         await sql`INSERT INTO teachers (name, department, subject) VALUES (${name}, ${department}, ${subject})`;
