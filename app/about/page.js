@@ -18,6 +18,14 @@ const AboutComponent = () => {
                     <p>We are on a mission to solve this 🚀</p>
                 </div>
             </div>
+            <div className='flex justify-between items-center px-20'>
+                <div>
+                    <h2 className='text-4xl font-semibold'>THE SOLUTION.</h2>
+                    <h2 className='text-2xl font-semibold'>boosting academic performance through the power of organisation ⚡</h2>
+                    <p>With better organisation comes increased productivity 📈. Productive and efficient work frees up time. MyStudyLife gives students the gift of time, and the freedom to spend time on the things that matter to them.</p>
+                </div>
+                <Image src={"/about2.webp"} width={500} height={500} alt='about' />
+            </div>
         </div>
     )
 }

@@ -156,3 +156,26 @@ export async function getRoutine(output) {
         return 0
     }
 }
+
+export async function getTeachers() {
+    const sql = neon(process.env.DATABASE_URL);
+    try {
+        let data = await sql`SELECT * FROM teachers`;
+        return data
+    } catch (err) {
+        console.log(err)
+        return 0
+    }
+}
+
+export async function updateTeachers(id, name, department, subject) {
+    // console.log(id, name, department, subject)
+    const sql = neon(process.env.DATABASE_URL);
+    try {
+        await sql`UPDATE teachers SET name=${name}, department=${department}, subject=${subject} WHERE id=${id}`;
+        return 1
+    } catch (err) {
+        console.log(err)
+        return 0
+    }
+}
