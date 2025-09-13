@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { saveAttendance } from '@/app/actions';
 import { Button } from '@/components/ui/button';
+import { toast } from "sonner"
 
 const AttendanceClient = ({ teachers }) => {
     const [attendance, setAttendance] = useState(() => {
@@ -19,16 +20,17 @@ const AttendanceClient = ({ teachers }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const absentTeachers = Object.entries(attendance)
+        const absentTeacherNames = Object.entries(attendance)
             .filter(([, status]) => status === 'absent')
-            .map(([teacherId]) => parseInt(teacherId, 10));
-
-        const result = await saveAttendance(absentTeachers);
+            .map(([teacherId]) => {
+                return teachers.find(t => t.id === parseInt(teacherId, 10))?.name;
+            }).filter(Boolean); // Filter out any undefined/null names
+        const result = await saveAttendance(absentTeacherNames);
 
         if (result) {
-            alert('Attendance saved successfully!');
+            toast.success('Attendance saved successfully!');
         } else {
-            alert('Failed to save attendance.');
+            toast.warning('Failed to save attendance.');
         }
     };
 

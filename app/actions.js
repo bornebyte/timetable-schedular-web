@@ -143,16 +143,15 @@ export async function deleteTeacher(id) {
     }
 }
 
-export async function saveAttendance(absentTeacherIds) {
+export async function saveAttendance(absentTeachers) {
     const sql = neon(process.env.DATABASE_URL);
     const attendanceDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
     try {
         // Using ON CONFLICT to update if an entry for the date already exists
         await sql`
-            INSERT INTO attendance (date, absent_teacher_ids) 
-            VALUES (${attendanceDate}, ${JSON.stringify(absentTeacherIds)})
-            ON CONFLICT (date) DO UPDATE SET absent_teacher_ids = EXCLUDED.absent_teacher_ids;
+            INSERT INTO attendance (date, absent_teacher_ids)
+            VALUES (${attendanceDate}, ${JSON.stringify(absentTeachers)});
         `;
         return 1;
     } catch (err) {
