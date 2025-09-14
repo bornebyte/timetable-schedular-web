@@ -4,14 +4,8 @@ import { AppSidebar } from "@/components/app-sidebar"
 
 export default function RootLayout({ children }) {
     return (
-        // <div className="w-full">
         <SidebarProvider>
-            <AppSidebar/>
-            <main className="w-full p-4 sm:p-6 md:p-8">
-                <SidebarTrigger />
-                {children}
-            </main>
-            <div className="flex">
+            <div className="w-full flex">
                 <AppSidebar/>
                 <main className="flex-1 p-4 sm:p-6 md:p-8">
                     <SidebarTrigger className="md:hidden mb-4" />
@@ -19,6 +13,5 @@ export default function RootLayout({ children }) {
                 </main>
             </div>
         </SidebarProvider>
-        // </div> 
     )
 }

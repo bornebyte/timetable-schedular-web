@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Zap, Users, Calendar, Printer, ThumbsUp, Clock, BrainCircuit, CheckCircle, ArrowRight } from "lucide-react";
+import { Users, Calendar, Printer, ThumbsUp, Clock, BrainCircuit, CheckCircle, ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="bg-background text-foreground">
       <main>
-        {/* Hero Section */}
         <section className="text-center py-20 md:py-32">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
@@ -23,7 +22,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Features Section */}
         <section id="features" className="py-16 md:py-24 bg-secondary/50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
@@ -49,7 +47,7 @@ export default function Home() {
               <div className="bg-background p-6 rounded-lg shadow-sm">
                 <Clock className="size-10 text-primary mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Customizable Timings</h3>
-                <p className="text-muted-foreground">Define custom time slots for different departments or academic years to fit your institution's unique structure.</p>
+                <p className="text-muted-foreground">Define custom time slots for different departments or academic years to fit your institution&apos;s unique structure.</p>
               </div>
               <div className="bg-background p-6 rounded-lg shadow-sm">
                 <Printer className="size-10 text-primary mb-4" />
@@ -65,7 +63,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* How It Works Section */}
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-12">Get Your Timetable in 4 Simple Steps</h2>
@@ -82,7 +79,7 @@ export default function Home() {
               <div className="flex flex-col items-center z-10 bg-background px-4">
                 <div className="flex items-center justify-center size-16 rounded-full bg-primary text-primary-foreground font-bold text-2xl mb-4">2</div>
                 <h3 className="font-semibold text-lg mb-2">Configure</h3>
-                <p className="text-muted-foreground text-sm">Define your institution's specific time slots.</p>
+                <p className="text-muted-foreground text-sm">Define your institution&apos;s specific time slots.</p>
               </div>
               <div className="flex flex-col items-center z-10 bg-background px-4">
                 <div className="flex items-center justify-center size-16 rounded-full bg-primary text-primary-foreground font-bold text-2xl mb-4">3</div>
@@ -98,7 +95,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
         <section className="py-16 md:py-24 bg-secondary/50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
@@ -113,7 +109,7 @@ export default function Home() {
                     <p className="text-sm text-muted-foreground">Green Valley High</p>
                   </div>
                 </div>
-                <p className="text-muted-foreground italic">"This tool transformed our scheduling process. What used to take a week now takes about 15 minutes. It's a game-changer."</p>
+                <p className="text-muted-foreground italic">&quot;This tool transformed our scheduling process. What used to take a week now takes about 15 minutes. It&apos;s a game-changer.&quot;</p>
               </div>
               <div className="bg-background p-6 rounded-lg shadow-sm">
                 <div className="flex items-center mb-4">
@@ -123,7 +119,7 @@ export default function Home() {
                     <p className="text-sm text-muted-foreground">City College of Arts</p>
                   </div>
                 </div>
-                <p className="text-muted-foreground italic">"The conflict resolution is flawless. We haven't had a single timetable clash since we started using this scheduler."</p>
+                <p className="text-muted-foreground italic">&quot;The conflict resolution is flawless. We haven&apos;t had a single timetable clash since we started using this scheduler.&quot;</p>
               </div>
               <div className="bg-background p-6 rounded-lg shadow-sm">
                 <div className="flex items-center mb-4">
@@ -133,7 +129,7 @@ export default function Home() {
                     <p className="text-sm text-muted-foreground">Oakwood Academy</p>
                   </div>
                 </div>
-                <p className="text-muted-foreground italic">"Incredibly intuitive and easy to use. The admin dashboard is clean, and managing teachers has never been simpler."</p>
+                <p className="text-muted-foreground italic">&quot;Incredibly intuitive and easy to use. The admin dashboard is clean, and managing teachers has never been simpler.&quot;</p>
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function AboutPage() {
     return (
         <div className="bg-background text-foreground">
-            <main className="container mx-auto px-10 py-12 md:py-20">
+            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
                 {/* Page Header */}
                 <section className="text-center mb-16">
                     <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">About Us</h1>

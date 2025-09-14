@@ -16,9 +16,9 @@ const ShowRoutines = ({ output }) => {
             {Object.entries(output).map(([department, routines]) => (
                 <div key={department} className="mb-12">
                     <h2 className="text-2xl font-bold mb-4">{department}</h2>
-                    <div className="shadow-md rounded-lg overflow-hidden">
-                        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                            <thead className="bg-gray-50 dark:bg-gray-800">
+                    <div className="border rounded-lg overflow-x-auto">
+                        <table className="min-w-full divide-y divide-border">
+                            <thead className="bg-muted/50">
                                 <tr>
                                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Class Number</th>
                                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Teacher Name</th>
@@ -27,7 +27,7 @@ const ShowRoutines = ({ output }) => {
                                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Time</th>
                                 </tr>
                             </thead>
-                            <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
+                            <tbody className="bg-background divide-y divide-border">
                                 {routines.map((item, index) => (
                                     <tr key={index} className="hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">{item.class_number}</td>

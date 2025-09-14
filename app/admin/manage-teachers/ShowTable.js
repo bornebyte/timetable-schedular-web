@@ -1,36 +1,38 @@
 "use client"
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+    SheetClose
+} from "@/components/ui/sheet";
 import { Input } from '@/components/ui/input'
 import { SquarePen, Trash } from 'lucide-react'
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { addTeacher, deleteTeacher, updateTeachers } from "@/app/actions"
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
+import React from "react";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 
 const ShowManageTeachersTable = ({ teachers }) => {
     const router = useRouter()
-    const nameRef = useRef(null)
-    const departmentRef = useRef(null)
-    const subjectRef = useRef(null)
 
     const newTeacherNameRef = useRef(null)
     const newTeacherDepartmentRef = useRef(null)
     const newTeacherSubjectRef = useRef(null)
 
-    const updateTeacherFunction = async (id, name, department, subject) => {
-        let data = await updateTeachers(id, name, department, subject)
+    const updateTeacherFunction = async (id, name, department, subject, closePopover) => {
+        const data = await updateTeachers(id, name, department, subject)
         if (data === 1) {
             router.refresh()
         }
     }
 
     const addTeacherFunction = async () => {
-        let data = await addTeacher(newTeacherNameRef.current.value, newTeacherDepartmentRef.current.value, newTeacherSubjectRef.current.value)
+        const data = await addTeacher(newTeacherNameRef.current.value, newTeacherDepartmentRef.current.value, newTeacherSubjectRef.current.value)
         if (data === 1) {
             router.refresh()
         }
@@ -45,12 +47,30 @@ const ShowManageTeachersTable = ({ teachers }) => {
 
     if (!teachers || teachers.length === 0) {
         return (
-            <div className="p-8">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-2xl font-bold">Manage Teachers</h1>
-                    <Link href="/admin/manage-teachers/add">
-                        <Button>Add New Teacher</Button>
-                    </Link>
+                    <Sheet>
+                        <SheetTrigger asChild>
+                            <Button>Add New Teacher</Button>
+                        </SheetTrigger>
+                        <SheetContent>
+                            <SheetHeader>
+                                <SheetTitle>Add a new teacher</SheetTitle>
+                                <SheetDescription>
+                                    Fill in the details below to add a new teacher to the system.
+                                </SheetDescription>
+                            </SheetHeader>
+                            <div className='flex flex-col gap-4 py-4'>
+                                <Input placeholder="Name" ref={newTeacherNameRef} />
+                                <Input placeholder="Department" ref={newTeacherDepartmentRef} />
+                                <Input placeholder="Subject" ref={newTeacherSubjectRef} />
+                            </div>
+                            <SheetClose asChild>
+                                <Button onClick={addTeacherFunction}>Save Teacher</Button>
+                            </SheetClose>
+                        </SheetContent>
+                    </Sheet>
                 </div>
                 <p>No teachers found.</p>
             </div>
@@ -58,24 +78,34 @@ const ShowManageTeachersTable = ({ teachers }) => {
     }
 
     return (
-        <div className="p-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-2xl font-bold">Manage Teachers</h1>
-                <Popover>
-                    <PopoverTrigger className="px-4 font-bold">Add New Teacher</PopoverTrigger>
-                    <PopoverContent>
-                        <div className='flex flex-col gap-4'>
+                <Sheet>
+                    <SheetTrigger asChild>
+                        <Button>Add New Teacher</Button>
+                    </SheetTrigger>
+                    <SheetContent>
+                        <SheetHeader>
+                            <SheetTitle>Add a new teacher</SheetTitle>
+                            <SheetDescription>
+                                Fill in the details below to add a new teacher to the system.
+                            </SheetDescription>
+                        </SheetHeader>
+                        <div className='flex flex-col gap-4 py-4'>
                             <Input placeholder="Name" ref={newTeacherNameRef} />
                             <Input placeholder="Department" ref={newTeacherDepartmentRef} />
                             <Input placeholder="Subject" ref={newTeacherSubjectRef} />
                         </div>
-                        <div className='flex justify-center w-full mt-4'><Button onClick={addTeacherFunction}>Save</Button></div>
-                    </PopoverContent>
-                </Popover>
+                        <SheetClose asChild>
+                            <Button onClick={addTeacherFunction}>Save Teacher</Button>
+                        </SheetClose>
+                    </SheetContent>
+                </Sheet>
             </div>
-            <div className="shadow-md rounded-lg overflow-hidden">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead className="bg-gray-50 dark:bg-gray-800">
+            <div className="border rounded-lg overflow-x-auto">
+                <table className="min-w-full divide-y divide-border">
+                    <thead className="bg-muted/50">
                         <tr>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Name</th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Department</th>
@@ -83,26 +113,17 @@ const ShowManageTeachersTable = ({ teachers }) => {
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Actions</th>
                         </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
+                    <tbody className="bg-background divide-y divide-border">
                         {teachers.map((teacher) => (
                             <tr key={teacher.id} className="hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">{teacher.name}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">{teacher.department}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">{teacher.subject}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2 flex justify-center gap-4">
-                                    <Popover>
-                                        <PopoverTrigger className="px-4"><SquarePen /></PopoverTrigger>
-                                        <PopoverContent>
-                                            <div className='flex flex-col gap-4'>
-                                                <Input placeholder="Name" ref={nameRef} defaultValue={teacher.name} />
-                                                <Input placeholder="Department" ref={departmentRef} defaultValue={teacher.department} />
-                                                <Input placeholder="Subject" ref={subjectRef} defaultValue={teacher.subject} />
-                                            </div>
-                                            <div className='flex justify-center w-full mt-4'><Button onClick={() => updateTeacherFunction(teacher.id, nameRef.current.value, departmentRef.current.value, subjectRef.current.value)}>Save</Button></div>
-                                        </PopoverContent>
-                                    </Popover>
-                                    {/* <Link href={`/admin/manage-teachers/edit/${teacher.id}`}><Button variant="outline">Edit</Button></Link> */}
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <div className="flex items-center justify-center gap-4">
+                                        <EditTeacherPopover teacher={teacher} onSave={updateTeacherFunction} />
                                     <Trash className='text-red-500' onClick={() => deleteTeacherFunction(teacher.id)} />
+                                    </div>
                                 </td>
                             </tr>
                         ))}
@@ -111,6 +132,45 @@ const ShowManageTeachersTable = ({ teachers }) => {
             </div>
         </div>
     )
+}
+
+function EditTeacherPopover({ teacher, onSave }) {
+    const nameRef = useRef(null);
+    const departmentRef = useRef(null);
+    const subjectRef = useRef(null);
+    const [open, setOpen] = React.useState(false);
+
+    const handleSave = async () => {
+        await onSave(
+            teacher.id,
+            nameRef.current.value,
+            departmentRef.current.value,
+            subjectRef.current.value
+        );
+        setOpen(false);
+    };
+
+    return (
+        <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+                <Button variant="ghost" size="icon"><SquarePen className="size-4" /></Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+                <div className="grid gap-4">
+                    <div className="space-y-2">
+                        <h4 className="font-medium leading-none">Edit Teacher</h4>
+                        <p className="text-sm text-muted-foreground">Update the teacher&apos;s details.</p>
+                    </div>
+                    <div className='flex flex-col gap-4'>
+                        <Input placeholder="Name" ref={nameRef} defaultValue={teacher.name} />
+                        <Input placeholder="Department" ref={departmentRef} defaultValue={teacher.department} />
+                        <Input placeholder="Subject" ref={subjectRef} defaultValue={teacher.subject} />
+                    </div>
+                    <Button onClick={handleSave}>Save</Button>
+                </div>
+            </PopoverContent>
+        </Popover>
+    );
 }
 
 export default ShowManageTeachersTable
