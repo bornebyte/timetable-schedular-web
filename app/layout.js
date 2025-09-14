@@ -36,8 +36,8 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <header className="flex justify-between items-center p-4 gap-4 h-16 mt-6">
-            <Image src={"/logo.jpeg"} height={50} width={50} alt='logo' className='rounded-md' />
-            <div className='flex gap-4'>
+            <div className='flex gap-4 items-center justify-center'>
+              <Image src={"/logo.jpeg"} height={50} width={50} alt='logo' className='rounded-md' />
               <Link href={"/"} className='font-semibold'>Home</Link>
               <Link href={"/about"} className='font-semibold'>About</Link>
               <Link href={"/admin/generate-routine"} className='font-semibold'>Admin</Link>

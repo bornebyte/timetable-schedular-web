@@ -15,27 +15,27 @@ import {
 const items = [
     {
         title: "Home",
-        url: "#",
+        url: "/admin/generate-routine",
         icon: Home,
     },
     {
-        title: "Inbox",
-        url: "#",
+        title: "Attendance",
+        url: "/admin/attendance",
         icon: Inbox,
     },
     {
-        title: "Calendar",
-        url: "#",
+        title: "Old Routine",
+        url: "/admin/old-routine",
         icon: Calendar,
     },
     {
-        title: "Search",
-        url: "#",
+        title: "Teacher Routine",
+        url: "/admin/teachers-routine",
         icon: Search,
     },
     {
-        title: "Settings",
-        url: "#",
+        title: "Manage Teacher",
+        url: "/admin/manage-teachers",
         icon: Settings,
     },
 ]
@@ -45,7 +45,7 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Application</SidebarGroupLabel>
+                    <SidebarGroupLabel>Menu</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (

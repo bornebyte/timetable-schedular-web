@@ -1,16 +1,24 @@
 import Link from "next/link"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
 
 export default function RootLayout({ children }) {
     return (
-        <div className="p-10">
-            <div className='flex justify-end gap-4 font-bold w-full underline'>
-                <Link href={"/admin/attendance"}>Attendance</Link>
-                <Link href={"/admin/generate-routine"}>Generate Routine</Link>
-                <Link href={"/admin/old-routine"}>Old Routine</Link>
-                <Link href={"/admin/teachers-routine"}>Teachers Routine</Link>
-                <Link href={"/admin/manage-teachers"}>Manage Teachers</Link>
+        // <div className="w-full">
+        <SidebarProvider>
+            <AppSidebar/>
+            <main className="w-full p-4 sm:p-6 md:p-8">
+                <SidebarTrigger />
+                {children}
+            </main>
+            <div className="flex">
+                <AppSidebar/>
+                <main className="flex-1 p-4 sm:p-6 md:p-8">
+                    <SidebarTrigger className="md:hidden mb-4" />
+                    {children}
+                </main>
             </div>
-            {children}
-        </div>
+        </SidebarProvider>
+        // </div> 
     )
 }
