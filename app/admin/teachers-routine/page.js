@@ -30,7 +30,7 @@ const TeachersRoutine = async () => {
 
     return (
         <div className="p-8">
-            <h1 className="text-3xl font-bold mb-8 text-center">Teachers' Routines</h1>
+            <h1 className="text-3xl font-bold mb-8 text-center">Teachers &apos; Routines</h1>
             {Object.entries(routineByTeacher).map(([teacherName, routines]) => (
                 <div key={teacherName} className="mb-12">
                     <h2 className="text-2xl font-bold mb-4">{teacherName}</h2>
